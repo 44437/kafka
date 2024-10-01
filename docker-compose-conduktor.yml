@@ -21,6 +21,10 @@ services:
     ports:
       - "8080:8080"
     volumes:
+      - type: bind
+        source: "./console-config.yml"
+        target: /opt/conduktor/console-config.yml
+        read_only: true
       - conduktor_data:/var/conduktor
     environment:
       CDK_DATABASE_URL: "postgresql://conduktor:change_me@postgresql:5432/conduktor-console"
@@ -28,6 +32,7 @@ services:
       CDK_MONITORING_ALERT-MANAGER-URL: http://conduktor-monitoring:9010/
       CDK_MONITORING_CALLBACK-URL: http://conduktor-platform:8080/monitoring/api/
       CDK_MONITORING_NOTIFICATIONS-CALLBACK-URL: http://localhost:8080
+      CDK_IN_CONF_FILE: /opt/conduktor/console-config.yml
 
   conduktor-monitoring:
     image: conduktor/conduktor-console-cortex:1.27.0
