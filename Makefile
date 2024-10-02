@@ -4,3 +4,5 @@ up-con:
 	docker compose -f docker-compose-conduktor.yml up
 down:
 	docker compose -f docker-compose-conduktor.yml down || docker compose -f docker-compose-kafka.yml down
+ct:
+	sh scripts/create-topics.sh
