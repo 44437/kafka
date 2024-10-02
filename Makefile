@@ -6,3 +6,5 @@ down:
 	docker compose -f docker-compose-conduktor.yml down || docker compose -f docker-compose-kafka.yml down
 ct:
 	sh scripts/create-topics.sh
+pm:
+	sh scripts/produce-messages.sh
