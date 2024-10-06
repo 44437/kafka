@@ -33,6 +33,9 @@ services:
       CDK_MONITORING_CALLBACK-URL: http://conduktor-platform:8080/monitoring/api/
       CDK_MONITORING_NOTIFICATIONS-CALLBACK-URL: http://localhost:8080
       CDK_IN_CONF_FILE: /opt/conduktor/console-config.yml
+      CDK_CLUSTERS_0_ID: "default"
+      CDK_CLUSTERS_0_NAME: "test-cluster"
+      CDK_CLUSTERS_0_BOOTSTRAPSERVERS: "PLAINTEXT://broker-2:8092,PLAINTEXT://broker-1:9092"
 
   conduktor-monitoring:
     image: conduktor/conduktor-console-cortex:1.27.0
