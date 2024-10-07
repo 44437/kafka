@@ -6,7 +6,7 @@ database:
   port: 5432
   name: 'conduktor-console'
   username: 'conduktor'
-  password: 'change_me'
+  password: 'admin'
   connection_timeout: 30 # in seconds
 
 admin:
