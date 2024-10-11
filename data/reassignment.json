@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "partitions": [
+    {
+      "topic": "topic-0",
+      "partition": 0,
+      "replicas": [0, 1]
+    },
+    {
+      "topic": "topic-0",
+      "partition": 1,
+      "replicas": [1, 0]
+    },
+    {
+      "topic": "topic-0",
+      "partition": 2,
+      "replicas": [0, 1]
+    }
+  ]
+}
