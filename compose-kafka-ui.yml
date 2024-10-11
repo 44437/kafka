@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "8010:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker-0:9092,broker-1:8092
+      DYNAMIC_CONFIG_ENABLED: 'true'
