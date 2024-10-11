@@ -1,14 +1,17 @@
 version: '3.8'
 
-x-broker-image: &x-broker-image "bitnami/kafka:3.3.2"
+x-broker-image: &x-broker-image "bitnami/kafka:3.8"
 x-environment-defaults: &environment-defaults
   KAFKA_CFG_PROCESS_ROLES: controller,broker
   KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_SPRING:PLAINTEXT
   KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+  KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT
   KAFKA_CFG_DELETE_TOPIC_ENABLE: true
+  KAFKA_KRAFT_CLUSTER_ID: password
+  KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@broker-0:9093,1@broker-1:8093
 
 services:
-  broker-1:
+  broker-0:
     image: *x-broker-image
     ports:
       - "9092:9092"
@@ -16,12 +19,11 @@ services:
     environment:
       <<: *environment-defaults
       KAFKA_CFG_NODE_ID: 0
-      KAFKA_CFG_BROKER_ID: 0
       KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,PLAINTEXT_SPRING://:9094
-      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@broker-1:9093
       KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://:9092,PLAINTEXT_SPRING://localhost:9094
-
-  broker-2:
+    volumes:
+      - broker_0_data:/bitnami/kafka
+  broker-1:
     image: *x-broker-image
     ports:
       - "8092:8092"
@@ -29,7 +31,12 @@ services:
     environment:
       <<: *environment-defaults
       KAFKA_CFG_NODE_ID: 1
-      KAFKA_CFG_BROKER_ID: 1
       KAFKA_CFG_LISTENERS: PLAINTEXT://:8092,CONTROLLER://:8093,PLAINTEXT_SPRING://:8094
-      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@broker-2:8093
       KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://:8092,PLAINTEXT_SPRING://localhost:8094
+    volumes:
+      - broker_1_data:/bitnami/kafka
+volumes:
+  broker_0_data:
+    driver: local
+  broker_1_data:
+    driver: local
