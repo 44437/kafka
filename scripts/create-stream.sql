@@ -1,0 +1,1 @@
+CREATE STREAM topic_0_stream (id STRING KEY, main VARCHAR, comment VARCHAR) WITH (KAFKA_TOPIC='topic-0', VALUE_FORMAT='AVRO');

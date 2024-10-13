@@ -36,7 +36,9 @@ services:
       CDK_CLUSTERS_0_ID: "default"
       CDK_CLUSTERS_0_NAME: "test-cluster"
       CDK_CLUSTERS_0_BOOTSTRAPSERVERS: "PLAINTEXT://broker-0:9092,PLAINTEXT://broker-1:8092"
-
+      CDK_CLUSTERS_0_KSQLDBS_0_ID: "ksqlD-local"
+      CDK_CLUSTERS_0_KSQLDBS_0_NAME: "ksqlDB"
+      CDK_CLUSTERS_0_KSQLDBS_0_URL: "http://host.docker.internal:8088"
   conduktor-monitoring:
     image: conduktor/conduktor-console-cortex:1.27.0
     environment:

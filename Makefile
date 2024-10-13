@@ -6,6 +6,8 @@ up-ui:
 	docker compose -f compose-kafka-ui.yml up
 up-sr:
 	docker compose -f compose-schema-registry.yml up
+up-ksql:
+	docker compose -f compose-ksqlDB.yml up
 down:
 	docker compose -f compose-conduktor.yml -f compose-kafka.yml down
 ct:
